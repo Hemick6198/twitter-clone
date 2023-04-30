@@ -18,8 +18,10 @@ import {
   updateDoc,
 } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
+import { useSession } from "next-auth/react";
 
 function Input() {
+  const { data: session } = useSession();
   const [input, setInput] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [showEmojis, setShowEmojis] = useState(false);
@@ -31,10 +33,10 @@ function Input() {
     setLoading(true);
 
     const docRef = await addDoc(collection(db, "posts"), {
-      // id: session.user.uid,
-      // username: session.user.name,
-      // userImg: session.user.image,
-      // tag: session.user.tag,
+      id: session.user.uid,
+      username: session.user.name,
+      userImg: session.user.image,
+      tag: session.user.tag,
       text: input,
       timestamp: serverTimestamp(),
     });
@@ -76,10 +78,15 @@ function Input() {
 
   return (
     <div
-      className={`border-b border-gray-700 p-3 flex space-x-3 
-    overflow-y-scroll ${loading && "opacity-60"}`}
+      className={`border-b border-gray-700 p-3 flex space-x-3  ${
+        loading && "opacity-60"
+      }`}
     >
-      <img src="" alt="" className="h-11 w-11 rounded-full cursor-pointer" />
+      <img
+        src={session.user.image}
+        alt=""
+        className="h-11 w-11 rounded-full cursor-pointer"
+      />
       <div className="w-full divide-y divide-gray-700">
         <div className={`${selectedFile && "pb-7"} ${input && "space-y-2.5"}`}>
           <textarea
@@ -87,15 +94,12 @@ function Input() {
             onChange={(e) => setInput(e.target.value)}
             rows="2"
             placeholder="What's happening?"
-            className="bg-transparent outline-none text-[#d9d9d9] text-lg
-            placeholder-gray-500 tracking-wide w-full min-h-[50px]"
+            className="text-area__styling"
           />
           {selectedFile && (
             <div className="relative">
               <div
-                className="absolute w-8 h-8 bg-[#15181c] hover:bg-[#272c26]
-            bg-opacity-75 rounded-full flex items-center justify-center top-1
-            left-1 cursor-pointer"
+                className="img__close--styling"
                 onClick={() => setSelectedFile(null)}
               >
                 <XIcon className="text-white h-5" />
@@ -115,7 +119,7 @@ function Input() {
                 className="icon"
                 onClick={() => filePickerRef.current.click()}
               >
-                <PhotographIcon className="icon__styling" />
+                <PhotographIcon className="input__icon--styling" />
                 <input
                   type="file"
                   hidden
@@ -124,13 +128,13 @@ function Input() {
                 />
               </div>
               <div className="icon rotate-90">
-                <ChartBarIcon className="icon__styling" />
+                <ChartBarIcon className="input__icon--styling" />
               </div>
               <div className="icon" onClick={() => setShowEmojis(!showEmojis)}>
-                <EmojiHappyIcon className="icon__styling" />
+                <EmojiHappyIcon className="input__icon--styling" />
               </div>
               <div className="icon">
-                <CalendarIcon className="icon__styling" />
+                <CalendarIcon className="input__icon--styling" />
               </div>
               <div className="emoji__styling">
                 {showEmojis && (
@@ -139,7 +143,7 @@ function Input() {
               </div>
             </div>
             <button
-              className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 disabled:cursor-default"
+              className="blue__btn"
               disabled={!input.trim() && !selectedFile}
               onClick={sendPost}
             >
