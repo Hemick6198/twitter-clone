@@ -14,7 +14,7 @@ function Login({ providers }) {
         alt="logo"
       />
       <div>
-        {Object.values(providers).map((provider) => (
+        {Object.values(providers).map(provider => (
           <div key={provider.name}>
             <button
               className="sign-in__btn group"
