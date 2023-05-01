@@ -134,7 +134,7 @@ function Post({ id, post, postPage }) {
                 <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0] relative" />
               </Menu.Button>
               <Menu.Items
-                className={`bg-black text-white float-left flex flex-col pt-8 top-[70px] z-50 items-center justify-center`}
+                className={`bg-black float-left text-white absolute flex flex-col pt-8 z-50 items-center justify-center`}
               >
                 <Menu.Item
                   className={`flex justify-center items-center flex-row`}

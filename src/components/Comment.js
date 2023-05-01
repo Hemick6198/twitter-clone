@@ -83,10 +83,10 @@ function Comment({ id, post, comment, postPage }) {
             <Menu>
               <Menu.Button onClick={(e) => e.stopPropagation()}>
                 {" "}
-                <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0] relative" />
+                <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0]" />
               </Menu.Button>
               <Menu.Items
-                className={`bg-black text-white text-center float-left flex flex-col pt-8 top-[70px]`}
+                className={`bg-black float-left text-white absolute flex flex-col pt-8 z-50 items-center justify-center`}
               >
                 <Menu.Item
                   className={`flex justify-start items-center flex-row`}
