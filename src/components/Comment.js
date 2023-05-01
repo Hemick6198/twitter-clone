@@ -69,9 +69,9 @@ function Comment({ id, post, comment }) {
                         Delete Post
                       </a>
                     ) : (
-                      <a className={`${active && " text-white"}`}>
+                      <a className={`${active && "bg-gray-600 text-white"}`}>
                         <XIcon className="h-5 px-2" />
-                        Incorrect Account
+                        Wrong Account to Delete
                       </a>
                     )
                   }
