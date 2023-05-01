@@ -89,7 +89,7 @@ function Comment({ id, post, comment, postPage }) {
                 className={`bg-black float-left text-white absolute flex flex-col pt-8 z-50 items-center justify-center`}
               >
                 <Menu.Item
-                  className={`flex justify-start items-center flex-row`}
+                  className={`flex justify-start items-center flex-row px-5`}
                 >
                   {({ active }) =>
                     session.user.tag === comment?.tag ? (
@@ -102,7 +102,7 @@ function Comment({ id, post, comment, postPage }) {
                         }}
                       >
                         <TrashIcon className="h-5 hover:text-red-600 px-2" />
-                        Delete Post
+                        Delete Post 
                       </a>
                     ) : (
                       <a className={`${active && "bg-gray-600 text-white"}`}>
@@ -114,7 +114,7 @@ function Comment({ id, post, comment, postPage }) {
                 </Menu.Item>
                 <Menu.Item
                   disabled
-                  className={`flex justify-center items-center flex-row`}
+                  className={`flex justify-center items-center flex-row px-5`}
                 >
                   {({ active }) => (
                     <a className={`${active && "bg-gray-500 text-white"}`}>

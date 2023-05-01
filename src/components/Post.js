@@ -137,7 +137,7 @@ function Post({ id, post, postPage }) {
                 className={`bg-black float-left text-white absolute flex flex-col pt-8 z-50 items-center justify-center`}
               >
                 <Menu.Item
-                  className={`flex justify-center items-center flex-row`}
+                  className={`flex justify-center items-center flex-row px-5`}
                 >
                   {({ active }) =>
                     session.user.uid === post?.id ? (
@@ -162,7 +162,7 @@ function Post({ id, post, postPage }) {
                 </Menu.Item>
                 <Menu.Item
                   disabled
-                  className={`flex justify-center items-center flex-row`}
+                  className={`flex justify-center items-center flex-row px-5`}
                 >
                   {({ active }) => (
                     <a className={`${active && "bg-gray-500 text-white"}`}>
