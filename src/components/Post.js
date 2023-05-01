@@ -11,11 +11,13 @@ import {
 import {
   ChartBarIcon,
   ChatIcon,
+  DotsCircleHorizontalIcon,
   DotsHorizontalIcon,
   HeartIcon,
   ShareIcon,
   SwitchHorizontalIcon,
   TrashIcon,
+  XIcon,
 } from "@heroicons/react/outline";
 import {
   HeartIcon as HeartIconFilled,
@@ -28,6 +30,9 @@ import Moment from "react-moment";
 import { useRecoilState } from "recoil";
 import { modalState, postIdState } from "../../atoms/modalAtom";
 import { db } from "../firebase";
+import Dropdown from "../components/Dropdown";
+import { Menu } from "@headlessui/react";
+import Link from "next/link";
 
 function Post({ id, post, postPage }) {
   const { data: session } = useSession();
@@ -41,7 +46,10 @@ function Post({ id, post, postPage }) {
   useEffect(
     () =>
       onSnapshot(
-        query(collection(db, "posts", id, "comments"), orderBy("timestamp", "desc")),
+        query(
+          collection(db, "posts", id, "comments"),
+          orderBy("timestamp", "desc")
+        ),
         (snapshot) => setComments(snapshot.docs)
       ),
     [id]
@@ -120,7 +128,49 @@ function Post({ id, post, postPage }) {
             )}
           </div>
           <div className="icon group flex-shrink-0 ml-auto">
-            <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0]" />
+            <Menu>
+              <Menu.Button onClick={(e) => e.stopPropagation()}>
+                {" "}
+                <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0] relative" />
+              </Menu.Button>
+              <Menu.Items
+                className={`bg-black text-white float-left flex flex-col pt-8 top-[70px] z-50 items-center justify-center`}
+              >
+                <Menu.Item
+                  className={`flex justify-center items-center flex-row`}
+                >
+                  {({ active }) =>
+                    session.user.uid === post?.id ? (
+                      <a
+                        className={`${active && "bg-red-400 text-white"}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteDoc(doc(db, "posts", id));
+                          router.push("/");
+                        }}
+                      >
+                        <TrashIcon className="h-5 hover:text-red-600 px-2" />
+                        Delete Post
+                      </a>
+                    ) : (
+                      <a className={`${active && " text-white"}`}>
+                        <XIcon className="h-5 px-2" />
+                        Incorrect Account
+                      </a>
+                    )
+                  }
+                </Menu.Item >
+                <Menu.Item disabled className={`flex justify-center items-center flex-row`}>
+                  {({ active }) => (
+                    <a className={`${active && "bg-gray-500 text-white"}`}>
+                      <span className="opacity-75 px-2">
+                        (more coming soon!)
+                      </span>
+                    </a>
+                  )}
+                </Menu.Item>
+              </Menu.Items>
+            </Menu>
           </div>
         </div>
         {postPage && (
