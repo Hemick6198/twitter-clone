@@ -15,6 +15,7 @@ import {
   DotsCircleHorizontalIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
+import Link from "next/link";
 
 function Sidebar() {
   const { data: session } = useSession();
@@ -25,7 +26,9 @@ function Sidebar() {
         <Image src={TwitterLogo} alt="twitter logo" width={30} height={30} />
       </div>
       <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
+        <Link href="/">
         <SidebarLink text="Home" Icon={HomeIcon} active />
+        </Link>
         <SidebarLink text="Explore" Icon={HashtagIcon} />
         <SidebarLink text="Notifications" Icon={BellIcon} />
         <SidebarLink text="Messages" Icon={InboxIcon} />
