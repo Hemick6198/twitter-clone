@@ -159,8 +159,11 @@ function Post({ id, post, postPage }) {
                       </a>
                     )
                   }
-                </Menu.Item >
-                <Menu.Item disabled className={`flex justify-center items-center flex-row`}>
+                </Menu.Item>
+                <Menu.Item
+                  disabled
+                  className={`flex justify-center items-center flex-row`}
+                >
                   {({ active }) => (
                     <a className={`${active && "bg-gray-500 text-white"}`}>
                       <span className="opacity-75 px-2">
